@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeelPlan | Your Friendly Task Buddy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100vh;
+        }
+
+        body {
+            background-color: #ffe2e2;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        img {
+            width: 150px;
+            margin: 20px 0;
+        }
+
+        .main {
+            width: 90%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: appear 0.5s ease-out forwards;
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            height: 40px;
+            border: 1.5px solid #ddd;
+            border-radius: 8px;
+            padding: 5px 10px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            outline: none;
+            font-family: 'Outfit', sans-serif;
+        }
+
+        button {
+            width: 100%;
+            height: 45px;
+            font-family: 'Outfit', sans-serif;
+            background: linear-gradient(to right, #f77b7b, #f73e3e);
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #e06666, #d73535);
+        }
+
+        .task {
+            background-color: #fff8f8;
+            border: 1.5px solid #f73e3e;
+            border-radius: 12px;
+            margin: 10px 0;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            text-align: left;
+        }
+
+        .task h3 {
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .task-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+
+        .task button {
+            width: 48%;
+            height: 35px;
+            font-size: 0.9rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .task button.complete {
+            background: #4caf50;
+            color: white;
+        }
+
+        .task button.complete:hover {
+            background: #45a049;
+        }
+
+        .task button.delete {
+            background: #f44336;
+            color: white;
+        }
+
+        .task button.delete:hover {
+            background: #d32f2f;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+
+        footer {
+            width: 100%;
+            max-width: 500px;
+            height: 60px;
+            background: #fff;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 15px 0;
+            position: fixed;
+            margin: auto;
+            bottom: 0;
+            bottom: -1px;
+        }
+
+        footer svg {
+            width: 28px;
+            height: 28px;
+            fill: #f73e3e;
+            cursor: pointer;
+            transition: fill 0.3s;
+        }
+
+        footer svg:hover {
+            fill: #d73535;
+        }
+
+        .active {
+            width: 28px;
+            height: 28px;
+            fill: #ff8484;
+            cursor: pointer;
+            transition: fill 0.3s;
+            animation: grow 0.5s forwards;
+        }
+
+        @keyframes grow {
+            from {
+                width: 28px;
+                height: 28px;
+            }
+            to {
+                width: 38px;
+                height: 38px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="logo.png" alt="FeelPlan Logo">
+    <div class="main">
+        <h2>Welcome to your Goals!</h2>
+        <p>Your friendly buddy for staying organized and reaching your goals.</p>
+        <input type="text" id="taskInput" placeholder="Enter your new goal!)">
+        <button id="addTaskButton">Let’s Do This!</button>
+        <div id="taskList"></div>
+    </div>
+    <br><br><br><br>
+    <footer>
+        <a href="main.html"><svg class="active" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M320-280q17 0 28.5-11.5T360-320q0-17-11.5-28.5T320-360q-17 0-28.5 11.5T280-320q0 17 11.5 28.5T320-280Zm0-160q17 0 28.5-11.5T360-480q0-17-11.5-28.5T320-520q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160q17 0 28.5-11.5T360-640q0-17-11.5-28.5T320-680q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm120 320h240v-80H440v80Zm0-160h240v-80H440v80Zm0-160h240v-80H440v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/></svg></a>
+        <a href="diary.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#490c0c"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg></a>
+        <a href="emmotions.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#490c0c"><path d="M480-260q68 0 123.5-38.5T684-400H276q25 63 80.5 101.5T480-260ZM312-520l44-42 42 42 42-42-84-86-86 86 42 42Zm250 0 42-42 44 42 42-42-86-86-84 86 42 42ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Z"/></svg></a>
+    </footer>
+
+    <script>
+const taskInput = document.getElementById('taskInput');
+const addTaskButton = document.getElementById('addTaskButton');
+const taskList = document.getElementById('taskList');
+
+function loadTasks() {
+    const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    tasks.forEach(task => createTaskElement(task.text, task.completed));
+}
+
+function saveTasks() {
+    const tasks = [];
+
+    document.querySelectorAll('.task').forEach(task => {
+        tasks.push({
+            text: task.querySelector('h3').textContent,
+            completed: task.querySelector('h3').classList.contains('completed')
+        });
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
+
+function createTaskElement(taskText, completed = false) {
+    const task = document.createElement('div');
+    task.className = 'task';
+    task.innerHTML = `
+        <h3 class="${completed ? 'completed' : ''}">${taskText}</h3>
+        <div class="task-buttons">
+            <button class="complete">Complete</button>
+            <button class="delete">Delete</button>
+        </div>
+    `;
+    task.style.opacity = 0;
+    taskList.appendChild(task);
+
+    setTimeout(() => {
+        task.style.transition = 'opacity 0.5s';
+        task.style.opacity = 1;
+    }, 10);
+
+    task.querySelector('.complete').addEventListener('click', () => {
+        const taskTitle = task.querySelector('h3');
+        taskTitle.classList.toggle('completed');
+        saveTasks();
+    });
+
+    task.querySelector('.delete').addEventListener('click', () => {
+        task.style.transition = 'opacity 0.5s';
+        task.style.opacity = 0;
+        setTimeout(() => {
+            task.remove();
+            saveTasks();
+        }, 500);
+    });
+}
+
+addTaskButton.addEventListener('click', () => {
+    const taskText = taskInput.value.trim();
+    if (taskText) {
+        createTaskElement(taskText);
+        saveTasks();
+        taskInput.value = '';
+    }
+});
+
+document.addEventListener('DOMContentLoaded', loadTasks);
+    </script>
+
+<script>
+    function isMobileDevice() {
+        return window.matchMedia("(max-width: 468px)").matches;
+    }
+  
+    function checkDevice() {
+        if (!isMobileDevice()) {
+            window.location.href = "error.html";
+        }
+    }
+  
+    checkDevice();
+  
+    window.addEventListener("resize", checkDevice);
+  </script>
+</body>
+</html>

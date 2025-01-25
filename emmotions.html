@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeelPlan | Your Friendly Task Buddy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            height: 100vh;
+        }
+
+        body {
+            background-color: #ffe2e2;
+            font-family: 'Outfit', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        img {
+            width: 150px;
+            margin: 0px 0;
+            margin-bottom: 10px;
+        }
+
+        .main {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 25px;
+            padding: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.8);
+            animation: appear 0.5s ease-out forwards;
+        }
+
+        @keyframes appear {
+            0% {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            color: #333;
+        }
+
+        p {
+            font-size: 1rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .calendar {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            width: 90%;
+            margin-top: 20px;
+            position: relative;
+            left: 50%;
+            margin-left: -12px;
+            margin-top: 100px;
+            bottom: -100px;
+            transform: translate(-50%, -50%)
+        }
+
+        .day {
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .day img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 0;
+        }
+
+
+        .day.selected {
+            border: 2px solid #f73e3e;
+        }
+
+        .emotion-menu {
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+        }
+
+        .emotion-menu h3 {
+            margin-bottom: 10px;
+        }
+
+        .emotion-options {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .emotion-options img {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .emotion-options img:hover {
+            transform: scale(1.2);
+        }
+
+        .emotion-button {
+            margin-top: 15px;
+            width: 100%;
+            padding: 10px;
+            background-color: #f73e3e;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .emotion-button:hover {
+            background-color: #e06666;
+        }
+
+        footer {
+            width: 100%;
+            max-width: 500px;
+            height: 60px;
+            background: #fff;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 15px 0;
+            position: fixed;
+            bottom: 0;
+            bottom: -1px;
+            margin: auto;
+        }
+
+        footer svg {
+            width: 28px;
+            height: 28px;
+            fill: #f73e3e;
+            cursor: pointer;
+            transition: fill 0.3s;
+        }
+
+        footer svg:hover {
+            fill: #d73535;
+        }
+
+        .active {
+            width: 28px;
+            height: 28px;
+            fill: #ff8484;
+            cursor: pointer;
+            transition: fill 0.3s;
+            animation: grow 0.5s forwards;
+        }
+
+        @keyframes grow {
+            from {
+                width: 28px;
+                height: 28px;
+            }
+            to {
+                width: 38px;
+                height: 38px;
+            }
+        }
+
+        .shrink {
+            width: 28px;
+            height: 28px;
+            animation: shrink 0.3s forwards;
+        }
+
+        @keyframes shrink {
+            from {
+                width: 38px;
+                height: 38px;
+            }
+            to {
+                width: 28px;
+                height: 28px;
+            }
+        }
+
+        @media (max-width: 468px) {
+            .calendar {
+                grid-template-columns: repeat(4, 1fr);
+                margin-bottom: -10px;
+            }
+
+            .day {
+                width: 35px;
+                height: 35px;
+            }
+
+            .emotion-menu {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img src="logo.png" alt="FeelPlan Logo">
+    <div class="main">
+        <h2>Welcome to the emotion tracker!</h2>
+        <p>Track your emotions every day</p>
+    </div>
+
+    <h1 id="monthDisplay" style="margin-top: 10px; margin-bottom: -10px;">January</h1>
+    <div class="calendar" id="calendar"></div>
+
+    <div class="emotion-menu" id="emotionMenu">
+        <h3>How are you today?</h3>
+        <div class="emotion-options">
+            <img src="sad.png" alt="Sad" class="emotion" data-emotion="sad">
+            <img src="tired.png" alt="Tired" class="emotion" data-emotion="tired">
+            <img src="so-so.png" alt="So-So" class="emotion" data-emotion="so-so">
+            <img src="normal.png" alt="Normal" class="emotion" data-emotion="normal">
+            <img src="joy.png" alt="Joy" class="emotion" data-emotion="joy">
+            <img src="angry.png" alt="Angry" class="emotion" data-emotion="angry">
+            <img src="agitated.png" alt="Agitated" class="emotion" data-emotion="agitated">
+        </div>
+        <button class="emotion-button" id="saveEmotion">back</button>
+    </div>
+
+    <footer>
+        <a href="main.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"><path d="M320-280q17 0 28.5-11.5T360-320q0-17-11.5-28.5T320-360q-17 0-28.5 11.5T280-320q0 17 11.5 28.5T320-280Zm0-160q17 0 28.5-11.5T360-480q0-17-11.5-28.5T320-520q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160q17 0 28.5-11.5T360-640q0-17-11.5-28.5T320-680q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm120 320h240v-80H440v80Zm0-160h240v-80H440v80Zm0-160h240v-80H440v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/></svg></a>
+        <a href="diary.html"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#490c0c"><path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h357l-80 80H200v560h560v-278l80-80v358q0 33-23.5 56.5T760-120H200Zm280-360ZM360-360v-170l367-367q12-12 27-18t30-6q16 0 30.5 6t26.5 18l56 57q11 12 17 26.5t6 29.5q0 15-5.5 29.5T897-728L530-360H360Zm481-424-56-56 56 56ZM440-440h56l232-232-28-28-29-28-231 231v57Zm260-260-29-28 29 28 28 28-28-28Z"/></svg></a>
+        <a href="emmotions.html"><svg class="active" class="active" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" fill="#490c0c"><path d="M480-260q68 0 123.5-38.5T684-400H276q25 63 80.5 101.5T480-260ZM312-520l44-42 42 42 42-42-84-86-86 86 42 42Zm250 0 42-42 44 42 42-42-86-86-84 86 42 42ZM480-80q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-400Zm0 320q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Z"/></svg></a>
+    </footer>
+
+    <script>
+        const calendar = document.getElementById("calendar");
+        const emotionMenu = document.getElementById("emotionMenu");
+        const emotionButton = document.getElementById("saveEmotion");
+    
+        let selectedDay = null;
+    
+        const emotions = {
+            sad: "sad.png",
+            tired: "tired.png",
+            "so-so": "so-so.png",
+            normal: "normal.png",
+            joy: "joy.png",
+            angry: "angry.png",
+            agitated: "agitated.png"
+        };
+
+        const clearOldMonthEmotions = () => {
+            const currentMonth = new Date().getMonth();
+            const lastMonth = localStorage.getItem("lastMonth");
+            if (lastMonth && currentMonth !== parseInt(lastMonth)) {
+                localStorage.clear();
+            }
+            localStorage.setItem("lastMonth", currentMonth.toString());
+        };
+
+        const loadEmotions = () => {
+            const date = new Date();
+            const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+            for (let i = 1; i <= daysInMonth; i++) {
+                const emotion = localStorage.getItem(`emotion-${i}`);
+                if (emotion) {
+                    const dayDiv = [...calendar.children].find(day => day.dataset.day == i);
+                    dayDiv.innerHTML = `<img class="emo-block" src="${emotions[emotion]}" alt="emotion">`;
+                }
+            }
+        };
+    
+        const generateCalendar = () => {
+            const date = new Date();
+            const daysInMonth = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+            calendar.innerHTML = "";
+            for (let i = 1; i <= daysInMonth; i++) {
+                const dayDiv = document.createElement("div");
+                dayDiv.classList.add("day");
+                dayDiv.innerHTML = `<span>${i}</span>`;
+                dayDiv.dataset.day = i;
+                dayDiv.addEventListener("click", () => {
+                    selectedDay = i;
+                    emotionMenu.style.display = "block";
+                });
+                calendar.appendChild(dayDiv);
+            }
+        };
+    
+        document.querySelectorAll(".emotion").forEach((img) => {
+            img.addEventListener("click", (e) => {
+                const emotion = e.target.dataset.emotion;
+                if (selectedDay !== null) {
+                    const dayDiv = [...calendar.children].find(day => day.dataset.day == selectedDay);
+                    dayDiv.innerHTML = `<img class="emo-block" src="${emotions[emotion]}" alt="emotion">`;
+                    emotionMenu.style.display = "none";
+                    localStorage.setItem(`emotion-${selectedDay}`, emotion);
+                }
+            });
+        });
+    
+        emotionButton.addEventListener("click", () => {
+            emotionMenu.style.display = "none";
+        });
+
+        clearOldMonthEmotions();
+        generateCalendar();
+        loadEmotions();
+    </script>
+    
+
+<script>
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June", 
+      "July", "August", "September", "October", "November", "December"
+    ];
+
+    const currentMonth = new Date().getMonth();
+
+    document.getElementById("monthDisplay").innerText = monthNames[currentMonth];
+  </script>
+
+<script>
+    function isMobileDevice() {
+        return window.matchMedia("(max-width: 468px)").matches;
+    }
+  
+    function checkDevice() {
+        if (!isMobileDevice()) {
+            window.location.href = "error.html";
+        }
+    }
+  
+    checkDevice();
+  
+    window.addEventListener("resize", checkDevice);
+  </script>
+    
+</body>
+</html>

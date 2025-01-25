@@ -1,0 +1,99 @@
+<style>
+    footer svg {
+        width: 28px;
+        height: 28px;
+        fill: #f73e3e;
+        cursor: pointer;
+        transition: fill 0.3s;
+    }
+    
+    footer svg:hover {
+        fill: #d73535;
+    }
+    
+    .active {
+        width: 28px;
+        height: 28px;
+        fill: #ff8484;
+        cursor: pointer;
+        transition: fill 0.3s;
+        animation: grow 0.5s forwards;
+    }
+    
+    @keyframes grow {
+        from {
+            width: 28px;
+            height: 28px;
+        }
+        to {
+            width: 38px;
+            height: 38px;
+        }
+    }
+    
+    .shrink {
+        width: 28px;
+        height: 28px;
+        animation: shrink 0.3s forwards;
+    }
+    
+    @keyframes shrink {
+        from {
+            width: 38px;
+            height: 38px;
+        }
+        to {
+            width: 28px;
+            height: 28px;
+        }
+    }
+    </style>
+    
+    <footer>
+        <a href="main.html" id="mainLink">
+            <svg class="active" xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" id="mainIcon">
+                <path d="M320-280q17 0 28.5-11.5T360-320q0-17-11.5-28.5T320-360q-17 0-28.5 11.5T280-320q0 17 11.5 28.5T320-280Zm0-160q17 0 28.5-11.5T360-480q0-17-11.5-28.5T320-520q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160q17 0 28.5-11.5T360-640q0-17-11.5-28.5T320-680q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm120 320h240v-80H440v80Zm0-160h240v-80H440v80Zm0-160h240v-80H440v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/>
+            </svg>
+        </a>
+        <a href="diary.html" id="diaryLink">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" id="diaryIcon">
+                <path d="M320-280q17 0 28.5-11.5T360-320q0-17-11.5-28.5T320-360q-17 0-28.5 11.5T280-320q0 17 11.5 28.5T320-280Zm0-160q17 0 28.5-11.5T360-480q0-17-11.5-28.5T320-520q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160q17 0 28.5-11.5T360-640q0-17-11.5-28.5T320-680q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm120 320h240v-80H440v80Zm0-160h240v-80H440v80Zm0-160h240v-80H440v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/>
+            </svg>
+        </a>
+        <a href="emotions.html" id="emotionsLink">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" id="emotionsIcon">
+                <path d="M320-280q17 0 28.5-11.5T360-320q0-17-11.5-28.5T320-360q-17 0-28.5 11.5T280-320q0 17 11.5 28.5T320-280Zm0-160q17 0 28.5-11.5T360-480q0-17-11.5-28.5T320-520q-17 0-28.5 11.5T280-480q0 17 11.5 28.5T320-440Zm0-160q17 0 28.5-11.5T360-640q0-17-11.5-28.5T320-680q-17 0-28.5 11.5T280-640q0 17 11.5 28.5T320-600Zm120 320h240v-80H440v80Zm0-160h240v-80H440v80Zm0-160h240v-80H440v80ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Z"/>
+            </svg>
+        </a>
+    </footer>
+    
+    <script>
+    function shrinkAndRedirect(linkId, iconId) {
+        const svgIcon = document.getElementById(iconId);
+        
+        // Добавляем класс для уменьшения размера
+        svgIcon.classList.add("shrink");
+    
+        // Задержка, чтобы анимация успела завершиться перед переходом
+        setTimeout(function() {
+            window.location.href = document.getElementById(linkId).href; // Переход на страницу
+        }, 300); // Задержка должна соответствовать времени анимации
+    }
+    
+    // Обработчики для кнопок
+    document.getElementById("mainLink").addEventListener("click", function(event) {
+        event.preventDefault();
+        shrinkAndRedirect("mainLink", "mainIcon");
+    });
+    
+    document.getElementById("diaryLink").addEventListener("click", function(event) {
+        event.preventDefault();
+        shrinkAndRedirect("diaryLink", "diaryIcon");
+    });
+    
+    document.getElementById("emotionsLink").addEventListener("click", function(event) {
+        event.preventDefault();
+        shrinkAndRedirect("emotionsLink", "emotionsIcon");
+    });
+    </script>
+    

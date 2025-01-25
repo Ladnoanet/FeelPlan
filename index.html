@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FeelPlan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      background-color: white;
+      font-family: 'Outfit', sans-serif;
+      width: 100%;
+      text-align: center;
+    }
+
+    .welcome {
+      z-index: 100000;
+      background-color: #f73e3e;
+      width: 100%;
+      height: auto;  
+      padding-top: 20px;
+      padding-bottom: 20px;
+      text-align: center;
+      color: white;
+      border-radius: 0 0 30px 30px;
+      position: relative;
+    }
+
+    .social a {
+            font-size: large;
+            font-weight: bold;
+            display: inline-block;
+            text-align: center;
+            line-height: 40px;
+            width: 40px;
+            height: 40px;
+            box-shadow: rgba(102, 102, 102, 0.158) 0px 0px 5px 2px;
+            text-decoration: none;
+            border-radius: 50%;
+            color: black;
+        }
+
+        .social {
+            width: 150px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: auto;
+            margin-top: 15px;
+        }
+
+        .sign-in {
+          width: 100%;
+          padding-top: 30px;
+          padding-bottom: 20px;
+          background-color: rgb(255, 255, 255);
+          margin-top: -30px;
+          z-index: 10000;
+          border-radius: 0 0 30px 30px;
+          position: relative;
+        }
+
+        .start-use {
+          width: 100%;
+          padding-top: 30px;
+          padding-bottom: 20px;
+          background-color: rgb(255, 240, 240);
+          margin-top: -30px;
+          z-index: 1000;
+          border-radius: 0 0 30px 30px;
+          position: relative;
+        }
+
+        .start-use a {
+          display: inline-block;
+          padding: 7px 40px;
+          background-color: #f73e3e;
+          font-size: 20px;
+          margin-top: 20px;
+          font-weight: bold;
+          color: white;
+          text-decoration: none;
+          border-radius: 20px;
+          position: relative;
+        }
+
+        .about-app {
+          width: 100%;
+          padding-top: 30px;
+          padding-bottom: 20px;
+          background-color: rgb(254, 220, 220);
+          margin-top: -30px;
+          z-index: 100;
+          border-radius: 0 0 30px 30px;
+          position: relative;
+        }
+
+        .about-creator {
+          width: 100%;
+          padding-top: 30px;
+          padding-bottom: 20px;
+          background-color: rgb(255, 207, 207);
+          margin-top: -30px;
+          z-index: 10;
+          border-radius: 0 0 30px 30px;
+          position: relative;
+        }
+
+        .footer {
+          width: 100%;
+          padding-top: 30px;
+          padding-bottom: 20px;
+          background-color: rgb(255, 191, 191);
+          margin-top: -30px;
+          z-index: 1;
+          position: relative;
+        }
+
+        .footer img {
+          width: 40px;
+        }
+
+        .socials {
+          width: 150px;
+          margin: auto;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+        }
+
+        .donate {
+          display: inline-block;
+          padding: 7px 40px;
+          background-color: #f73e3e;
+          font-size: 20px;
+          margin-top: 20px;
+          font-weight: bold;
+          color: white;
+          text-decoration: none;
+          border-radius: 20px;
+          position: relative;
+        }
+  </style>
+</head>
+<body>
+
+  <div class="welcome">
+    <h1 style="width: 80%; margin: auto;">Welcome, Friend!</h1>
+  </div>
+
+  <div class="sign-in">
+
+    <h1 style="margin-top: 20px;">Sign in!</h1>
+
+    <p style="margin-top: 20px; color: grey;">You can log in using:</p>
+    <div class="social">
+      <a style="color: #0881f2;" href="main.html">f</a>
+      <a style="color: #f73e3e;" href="main.html">G+</a>
+      <a style="color: #053681;" href="main.html">in</a>
+    </div>
+
+  </div>
+
+  <div class="start-use">
+
+    <h2 style="margin-top: 20px;">Start using it right now!</h2>
+
+    <a href="main.html">Start use!</a>
+
+  </div>
+
+  <div class="about-app">
+
+    <h2 style="margin-top: 20px;">About the App!</h2>
+    <br>
+    <p  style="margin-top: 30px; color: #313131; line-height: 1.6; width: 80%; margin: auto;">
+      Welcome to the ultimate 3-in-1 productivity and self-care app! This app combines three essential tools in one place:
+    </p>
+  
+    <ul style="margin-top: 20px; text-align: left; margin-left: 10%; margin-right: 10%; line-height: 1.8; color: #313131;">
+      <li><strong>To-Do List:</strong> Plan your tasks, organize your day, and stay on top of your goals with ease.</li>
+      <li><strong>Personal Diary:</strong> Keep your memories, thoughts, and daily reflections in a safe, private space.</li>
+      <li><strong>Emotion Tracker:</strong> Monitor your mood and emotional well-being to better understand yourself and improve your mental health.</li>
+    </ul>
+    <br>
+    <p style="margin-top: 20px; color: #313131; line-height: 1.6; width: 80%; margin: auto;">
+      Whether you want to stay productive, document your journey, or take control of your emotions, this app has everything you need to lead a balanced and fulfilling life. Start your journey to a more organized and mindful you today!
+    </p>
+  
+  </div>
+
+  <div class="about-creator">
+    <h2 style="margin-top: 20px;">About creator!</h2>
+    <p style="width: 80%; margin: auto; margin-top: 10px; color: #313131; line-height: 1.6;">This app was created by <a style="color: #f73e3e; text-decoration: none; font-weight: bold;" href="https://t.me/@TupoLadno">@Ladnoanet</a>. The creator is <strong>14 years old</strong> and his name is <strong>Andrey Kulakov</strong>. The creator is fully open in contacts and you can easily write to him.</p>
+    <p style="width: 80%; margin: auto; margin-top: 10px; color: #313131; line-height: 1.6; font-size: 20px;">Please Donate 🥺</p>
+    <a style="margin-top: 5px;" class="donate" href="https://www.donationalerts.com/r/ladnoanet">Donate!</a>
+  </div>
+
+  <div class="footer">
+    <h2 style="margin-top: 20px;">Contacts</h2>
+    <div style="margin-top: 20px;" class="socials">
+      <a href="https://t.me/@TupoLadno"><img src="telegram.svg" alt=""></a>
+      <a href="https://www.donationalerts.com/r/ladnoanet"><img src="DA_Alert_Black.svg" alt=""></a>
+    </div>
+  </div>
+  
+  
+</body>
+</html>
+
+<script>
+  function isMobileDevice() {
+      return window.matchMedia("(max-width: 568px)").matches;
+  }
+
+  function checkDevice() {
+      if (!isMobileDevice()) {
+          window.location.href = "error.html";
+      }
+  }
+
+  checkDevice();
+
+  window.addEventListener("resize", checkDevice);
+</script>

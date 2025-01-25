@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FeelPlan | Error</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: rgb(255, 226, 226);
+            font-family: 'Outfit', sans-serif;
+            text-align: center;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        h1 {
+            width: 400px;
+        }
+
+        a {
+          display: inline-block;
+          padding: 7px 40px;
+          background-color: #f73e3e;
+          font-size: 20px;
+          margin-top: 20px;
+          font-weight: bold;
+          color: white;
+          text-decoration: none;
+          border-radius: 20px;
+          position: relative;
+        }
+
+        div {
+            margin: auto;
+        }
+
+        @media (max-width: 388px) {
+            h1 {
+                width: 80%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <img style="width: 160px;" src="error.png" alt="">
+    <h1 style="color: #8b1818; margin: auto;">Oh no! An error has occurred! You don't seem to be using a smartphone.</h1>
+    <a href="#" onclick="history.back(); return false;">Try again</a>
+</div>
+</body>
+</html>
